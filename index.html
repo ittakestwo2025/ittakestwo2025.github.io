@@ -20,6 +20,7 @@
     <script src="static/js/bulma-carousel.min.js"></script>
     <script src="static/js/bulma-slider.min.js"></script>
     <script src="static/js/index.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -80,6 +81,200 @@
         <!--/ Abstract. -->
     </div>
 </section>
+
+
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    <h2 class="title is-3">Overview</h2>
+                    <div class="content has-text-justified">
+                        
+                    </div>
+                    <img src="./static/figures/diffusion_network.jpg" width="80%">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-small is-light">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="column is-centered has-text-centered">
+                <h2 class="title is-3">InterACT++ Dataset</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We enrich the two-person conversational motion dataset with a wider array of interaction patterns. The enriched dataset includes physical actions such as hugging, handshaking, waving, grabbing the other's hand, patting, and giving high-fives. For each action, 10 scenarios containing plausible situations in which the action may be performed are devised, and each scenario is recorded 4 times for data completeness (twice with actors sitting, twice with actors standing). The newly collected data has a total of 402 clips and 1.7 hours. We call the enriched dataset as InterACT++. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    <p style="text-align: center;"><b>The comparison of the InterACT++ dataset with the existing speech2motion datasets</b></p>
+                    <img src="./static/figures/dataset.jpg" width="60%">
+                </div>
+            </div>
+        </div>
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    <p style="text-align: center;"><b>Sample clips from the InterACT++ dataset</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-small is-light">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="column is-centered has-text-centered">
+                <h2 class="title is-3">LLM-based Trajectory Planning</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Due to the complexity of the real-world conversational scenarios, it's challenging to collect all possible trajectories for each action. To address this, we use LLM as zero-shot trajectory planner to generate a high level sparse spatial points at first, and then use a diffusion-based trajectory refinement model to generate a dense motion trajectory.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-small is-light">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="column is-centered has-text-centered">
+                <h2 class="title is-3">Comparison of Single-person Co-Speech Motion Generation</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Different from previous seq2seq co-speech motion generative models, our motion generator is auto-regressive and can generate motion in an online manner. Benefiting from the diffusion-based motion synthesis model, our system can generate more natural motions more efficiently. There are few main insights in the AR model vs. seq2seq model:
+                        <ul>
+                            <li>
+                                <b>The pre-trained speech embedding is larger than the motion space, aligning these unbalanced data with a larger receptive field is more challenging for the seq2seq generation.</b>
+                            </li>
+                            <li>
+                                <b>AR model is causal by using history window as additional input, and can generate motion with better temporal consistency.</b>
+                            </li>
+                            <li>
+                                <b>Our model requires less future window (0.5s~1.5s), it leads less latency and better real-time applicability.</b>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-small is-light">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="column is-centered has-text-centered">
+                <h2 class="title is-3">Two-person Conversational Motion Generation Results</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We demonstrate the effectiveness of our system to generate two-person conversational motions, in more dynamic and interactive scenarios, in the following experiments.
+                        <ul></ul>
+                            <li>
+                                <b>We first evaluate the performance of our system on the test split of InterACT++ dataset, which is the first two-person conversational motion dataset.</b>
+                            </li>
+                            <li>
+                                <b>We then test our system on the wild audio test set, which contains more diverse and complex conversational scenarios.</b>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    <p style="text-align: center;"><b>Benchmark on the InterACT++ </b></p>
+                </div>
+            </div>
+        </div>
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    <p style="text-align: center;"><b>Comparison with Baselines</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-full has-text-centered">
+                    <p style="text-align: center;"><b>Wild Audio Test Set</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="columns is-centered">
+        <div class="column is-8">
+            <div class="content">
+                <p>
+                    This website is licensed under a <a rel="license"
+                                                        href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                    Commons Attribution-ShareAlike 4.0 International License</a>.
+                </p>
+                <p>
+                    Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If
+                    you want to reuse their <a
+                        href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them
+                    appropriately.
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>
 
 </body>
 </html>

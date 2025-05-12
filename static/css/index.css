@@ -154,6 +154,7 @@ body {
 
 .video-gallery {
   position: relative;
+  z-index: 2; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,6 +163,7 @@ body {
 .video-gallery #gallery {
   display: flex;
   gap: 1rem;
+  z-index: 3;
   flex-wrap: wrap;
   justify-content: center;
   transition: transform 0.5s ease-in-out;
@@ -170,9 +172,21 @@ body {
 
 .video-gallery .video-container {
   text-align: center;
-  width: 15%;
+  position: relative;
+  width: 100%;
+  z-index: 3;
   display: none;
   flex-shrink: 0;
+}
+
+.video-gallery .video-label {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .video-gallery .video-container.active {
@@ -181,7 +195,8 @@ body {
 
 .video-gallery video {
   cursor: pointer;
-  pointer-events: none;
+  position: relative;
+  z-index: 4;
 }
 
 .video-gallery #modalVideo {
@@ -196,6 +211,7 @@ body {
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
+  z-index: 99;
   pointer-events: none; /* Prevent buttons from interfering with clicks on videos */
 }
 

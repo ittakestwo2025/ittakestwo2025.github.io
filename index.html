@@ -196,8 +196,112 @@
     <div class="hero-body">
         <div class="container is-max-desktop">
             <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
-                    
+                <div class="video-gallery is-full has-text-centered">
+
+                    <div class="video-labels" style="display: flex; flex-direction: row;">
+                        <span class="video-label" data-index="0">GT </span>
+                        <span class="video-label" data-index="1">Ours </span>
+                        <span class="video-label" data-index="2">Baseline 1 </span>
+                        <span class="video-label" data-index="3">Baseline 2 </span>
+                    </div>
+
+                    <div id="single-gallery"></div>
+                    <div class="controls">
+                        <button onclick="prevSingleWayneSlide()">&#10094;</button>
+                        <button onclick="nextSingleWayneSlide()">&#10095;</button>
+                    </div>
+
+                    <!-- Progress indicators -->
+                    <div class="progress-indicators" style="display: flex; justify-content: center; margin-top: 15px;">
+                        <div class="indicator" data-index="0" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
+                        <div class="indicator" data-index="1" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
+                        <div class="indicator" data-index="2" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
+                        <div class="indicator" data-index="3" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
+                    </div>
+
+
+                    <script>
+                        const singleWayneVideoSources = [
+                            "static/videos/single/1_single_wayne_0_1_1.mp4",
+                            "static/videos/single/2_scott_0_1_1.mp4", 
+                            "static/videos/single/3_solomon_0_3_3.mp4",
+                            "static/videos/single/4_lawrence_0_4_4.mp4"
+                        ];
+
+                        let singleWayneIndex = 0;
+                        const gallery = document.getElementById("single-gallery");
+                        gallery.classList.add("video-gallery");
+
+                        const videoElements = [];
+                        const indicators = document.querySelectorAll('.indicator');
+
+                        function preloadSingleWayneVideos() {
+                            singleWayneVideoSources.forEach((src, i) => {
+                                const wrapper = document.createElement("div");
+                                wrapper.classList.add("video-container");
+                               
+                                const video = document.createElement("video");
+                                video.src = src;
+                                video.loop = true;
+                                video.muted = false;
+                                video.controls = true;
+                                video.playsinline = true;
+
+                                wrapper.appendChild(video);
+                                gallery.appendChild(wrapper);
+                                videoElements.push(wrapper);
+                            });
+                        }
+
+                        function updateSingleWayneGallery() {
+                            // Mute all videos first
+                            videoElements.forEach((el) => {
+                                const video = el.querySelector('video');
+                                if (video) {
+                                    video.muted = true;
+                                    video.pause();
+                                }
+                                el.style.display = "none";
+                            });
+                            
+                            // Display and unmute the current video
+                            videoElements[singleWayneIndex].style.display = "block";
+                            const currentVideo = videoElements[singleWayneIndex].querySelector('video');
+                            if (currentVideo) {
+                                currentVideo.muted = false;
+                            }
+                            
+                            // Update indicators
+                            indicators.forEach((indicator, i) => {
+                                if (i === singleWayneIndex) {
+                                    indicator.style.backgroundColor = "#333";
+                                } else {
+                                    indicator.style.backgroundColor = "#ccc";
+                                }
+                            });
+                        }
+
+                        function nextSingleWayneSlide() {
+                            singleWayneIndex = (singleWayneIndex + 1) % singleWayneVideoSources.length;
+                            updateSingleWayneGallery();
+                        }
+
+                        function prevSingleWayneSlide() {
+                            singleWayneIndex = (singleWayneIndex - 1 + singleWayneVideoSources.length) % singleWayneVideoSources.length;
+                            updateSingleWayneGallery();
+                        }
+
+                        // Add click event to indicators
+                        indicators.forEach((indicator, i) => {
+                            indicator.addEventListener('click', () => {
+                                singleWayneIndex = i;
+                                updateSingleWayneGallery();
+                            });
+                        });
+
+                        preloadSingleWayneVideos();
+                        updateSingleWayneGallery();
+                    </script>
                 </div>
             </div>
         </div>

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta property="og:title" content="It Takes Two: Learning Dynamic Co-Speech Conversational Motion from Limited Data"/>
+    <meta property="og:title"
+        content="It Takes Two: Learning Dynamic Co-Speech Conversational Motion from Limited Data" />
 
     <title>It Takes Two: Learning Dynamic Co-Speech Conversational Motion from Limited Data</title>
 
@@ -26,254 +28,1026 @@
 <body>
 
 
-<section class="publication-header">
-    <div class="hero-body">
-        <div class="container is-max-widescreen">
-            <!-- <div class="columns is-centered"> -->
-            <div class="column has-text-centered">
-                <h1 class="title is-1 publication-title">It Takes Two: Learning Dynamic Co-Speech Conversational Motion from Limited Data</h1>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="conference-name-block">
-    <div class="column has-text-centered">
-        <div class="title is-4 conference-name">
-            Anonymous authors
-        </div>
-    </div>
-</section>
-
-<section class="hero teaser">
-    <div class="container is-max-desktop">
+    <section class="publication-header">
         <div class="hero-body">
-            <div class="column is-centered has-text-centered">
-                <img src="static/figures/teaser.jpg" alt="breakdancing dragons" width="100%"/>
-            </div>
-
-            <h2 class="content has-text-centered">
-                Our system takes the speech of two persons as input to generate dynamic full-body interactions.
-            </h2>
-        </div>
-    </div>
-</section>
-
-<section class="section hero is-light">
-    <div class="container is-max-desktop">
-        <!-- Abstract. -->
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <h2 class="title is-3">Abstract</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        Conversational scenarios are common in the real-world, yet existing co-speech motion synthesis approaches often fall short in these contexts, where one person's audio and gestures will influence the other's responses. 
-                        Additionally, most existing methods rely on offline sequence-to-sequence frameworks, which are unsuitable for online applications. 
-                        In this work, we introduce an audio-driven, auto-regressive system designed to synthesize dynamic movements for two characters during a conversation. 
-                        At the core of our approach is a diffusion-based full-body motion synthesis model, which is conditioned on the past states of both characters, speech audio, and a task-oriented motion trajectory input, allowing for flexible spatial control.
-                        To enhance the model's ability to learn diverse interactions, we have enriched existing two-person conversational motion datasets with more dynamic and interactive motions. 
-                        We evaluate our system through multiple experiments to show it outperforms across a variety of tasks, including single and two-person co-speech motion generation, as well as interactive motion generation.
-                        To the best of our knowledge, this is the first online system capable of generating interactive full-body motions for two characters from speech.
-                    </p>
+            <div class="container is-max-widescreen">
+                <!-- <div class="columns is-centered"> -->
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">It Takes Two: Learning Dynamic Co-Speech Conversational
+                        Motion from Limited Data</h1>
                 </div>
             </div>
         </div>
-        <!--/ Abstract. -->
-    </div>
-</section>
+    </section>
 
+    <section class="conference-name-block">
+        <div class="column has-text-centered">
+          <div class="title is-4 conference-name">
+            Anonymous authors
+          </div>
+        </div>
+    
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+    
+              <a target="_blank" class="external-link button is-normal is-rounded">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+    
+            <span class="link-block">
+              <a target="_blank" class="external-link button is-normal is-rounded">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+    
+            <span class="link-block">
+              <a target="_blank" class="external-link button is-normal is-rounded">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span>Dataset</span>
+              </a>
+            </span>
+    
+            <span class="link-block">
+              <a target="_blank" class="external-link button is-normal is-rounded">
+                <span class="icon"><i class="fab fa-youtube"></i></span>
+                <span>Video</span>
+              </a>
+            </span>
+          </div>
+        </div>
+    
+      </section>
 
-<section class="hero is-small">
-    <div class="hero-body">
+    <section class="hero teaser">
         <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
-                    <h2 class="title is-3">Overview</h2>
+            <div class="hero-body">
+                <div class="column is-centered has-text-centered">
+                    <img src="static/figures/teaser.jpg" alt="breakdancing dragons" width="100%" />
+                </div>
+
+                <h2 class="content has-text-centered">
+                    Our system takes the speech of two persons as input to generate dynamic full-body interactions. <br>We will release the code and dataset upon acceptance.
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section hero is-light">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths" style="width: 100%;">
+                    <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
-                        
+                        <p>
+                            Realistic two-person interactions require synthesizing dynamic, interdependent motions that respond to speech, scene context, and mutual influence.
+                            Prior work—limited to single-person, upper-body gestures in static scenarios—fails to capture the full-body coordination (e.g., working together) and causal reciprocity (e.g., nod triggering a smile) inherent in real-world conversations. Key challenges include the combinatorial complexity of modeling bidirectional speech-motion influence and maintaining long-term consistency in open-ended interactions.
+To address these challenges, we propose a novel two-stage framework. First, a large language model (LLM) parses speech and scene context to infer coarse movement intentions (e.g., "approach," "sit"), which are translated into root trajectories for both characters. Second, a block autoregressive diffusion model synthesizes full-body motions for both characters, conditioned on speech, past interactions, and trajectories. A dual-stream architecture models mutual reactivity, while trajectory-aware normalization grounds motion in context. 
+Our framework balances the strengths of autoregressive and diffusion models, enabling low-latency, high-quality motion generation over arbitrary durations. 
+We also curate InterAct++, a dataset of dyadic interactions with speech, full-body motion, and diverse scenarios.
+To our knowledge, this is the first method capable of generating interaction-aware, long-form motion for two characters directly from speech. Experiments show superior performance over state-of-the-art methods. Our results highlight the potential of LLMs for zero-shot motion planning in applications such as animation and social gaming and AR.
+                        </p>
                     </div>
-                    <img src="./static/figures/diffusion_network.jpg" width="80%">
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+    </section>
+
+
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-full has-text-centered">
+                        <h2 class="title is-3">Overview</h2>
+                        <div class="content has-text-justified">
+
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="flex: 0.35;">
+                                <p style="text-align: center; margin-bottom: 2rem;"><b>The block autoregressive system</b></p>
+                                <img src="./static/figures/armode.jpg" width="100%">
+                            </div>
+                            <div style="flex: 0.65;">
+                                <p style="text-align: center; margin-bottom: 0rem;"><b>The multi-condition encoder</b></p>
+                                <img src="./static/figures/encoder.jpg" width="100%">
+                            </div>
+                        </div>
+                        <!-- <div class="content has-text-justified">
+                            <p>
+                                The core of our system is a block autoregressive diffusion model that synthesizes full-body motions for both characters, conditioned on speech, past interactions, and trajectories.
+                            </p>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="hero is-small is-light">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="column is-centered has-text-centered">
-                <h2 class="title is-3">InterACT++ Dataset</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        We enrich the two-person conversational motion dataset with a wider array of interaction patterns. The enriched dataset includes physical actions such as hugging, handshaking, waving, grabbing the other's hand, patting, and giving high-fives. For each action, 10 scenarios containing plausible situations in which the action may be performed are devised, and each scenario is recorded 4 times for data completeness (twice with actors sitting, twice with actors standing). The newly collected data has a total of 402 clips and 1.7 hours. We call the enriched dataset as InterACT++. 
-                    </p>
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">InterACT++ Dataset</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            We enrich the two-person conversational motion dataset with a wider array of interaction
+                            patterns. The enriched dataset includes physical actions such as hugging, handshaking,
+                            waving, grabbing the other's hand, patting, and giving high-fives. For each action, 10
+                            scenarios containing plausible situations in which the action may be performed are devised,
+                            and each scenario is recorded 4 times for data completeness (twice with actors sitting,
+                            twice with actors standing). The newly collected data has a total of 402 clips and 1.7
+                            hours. We call the enriched dataset as InterACT++.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<section class="hero is-small">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
-                    <p style="text-align: center;"><b>The comparison of the InterACT++ dataset with the existing speech2motion datasets</b></p>
-                    <img src="./static/figures/dataset.jpg" width="60%">
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-full has-text-centered">
+                        <p style="text-align: center;"><b>The comparison of the InterACT++ dataset with the existing
+                                speech2motion datasets</b></p>
+                        <img src="./static/figures/dataset.jpg" width="60%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+
+
+                    <div class="video-gallery is-full has-text-centered">
+
+                        <p style="text-align: center; margin-bottom: 10px;"><b>Sample clips from the InterACT++
+                                dataset</b></p>
+
+                        <div id="dataset-gallery"></div>
+                        <div class="controls">
+                            <button onclick="prevGroupSlide()">&#10094;</button>
+                            <button onclick="nextGroupSlide()">&#10095;</button>
+                        </div>
+
+                        <!-- Progress indicators -->
+                        <div class="progress-indicators"
+                            style="display: flex; justify-content: center; margin-top: 15px;" id="dataset-indicators">
+                            <!-- Indicators will be dynamically generated based on number of groups -->
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const indicatorsContainer = document.getElementById('dataset-indicators');
+                                    const groupCount = Math.ceil(datasetVideoSources.length / 4);
+                                    for (let i = 0; i < groupCount; i++) {
+                                        const indicator = document.createElement('div');
+                                        indicator.className = 'indicator';
+                                        indicator.dataset.index = i;
+                                        indicator.style = 'width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;';
+
+                                        indicator.addEventListener('click', function () {
+                                            currentGroup = i;
+                                            updateDatasetGallery();
+                                        });
+
+                                        indicatorsContainer.appendChild(indicator);
+                                    }
+                                });
+                            </script>
+                        </div>
+
+
+                        <script>
+                            const datasetVideoSources = [
+                                "static/videos/dataset/Recording_00241.mp4",
+                                "static/videos/dataset/Recording_00255.mp4",
+                                "static/videos/dataset/Recording_00264.mp4",
+                                "static/videos/dataset/Recording_00271.mp4",
+                                "static/videos/dataset/Recording_00361.mp4",
+                                "static/videos/dataset/Recording_00378.mp4",
+                                "static/videos/dataset/Recording_00381.mp4",
+                                "static/videos/dataset/Recording_00398.mp4",
+                                "static/videos/dataset/Recording_00401.mp4",
+                                "static/videos/dataset/Recording_00414.mp4",
+                                "static/videos/dataset/Recording_00424.mp4",
+                                "static/videos/dataset/Recording_00496.mp4",
+                                "static/videos/dataset/Recording_00503.mp4",
+                                "static/videos/dataset/Recording_00515.mp4",
+                                "static/videos/dataset/Recording_00530.mp4",
+                                "static/videos/dataset/Recording_00542.mp4",
+                                "static/videos/dataset/Recording_00553.mp4",
+                                "static/videos/dataset/Recording_00623.mp4",
+                                "static/videos/dataset/Recording_00632.mp4",
+                                "static/videos/dataset/Recording_00643.mp4"
+                            ];
+
+                            let currentGroup = 0;
+                            const videosPerRow = 3;
+                            const rowsPerGroup = 2;
+                            const videosPerGroup = videosPerRow * rowsPerGroup;
+                            const datasetGallery = document.getElementById("dataset-gallery");
+                            datasetGallery.classList.add("video-gallery");
+                            datasetGallery.style.display = "flex";
+                            datasetGallery.style.flexWrap = "wrap";
+                            datasetGallery.style.gap = "10px";
+                            datasetGallery.style.justifyContent = "center";
+
+                            const datasetVideoElements = [];
+
+                            function preloadDatasetVideos() {
+                                datasetVideoSources.forEach((src, i) => {
+                                    const wrapper = document.createElement("div");
+                                    wrapper.classList.add("video-container");
+                                    wrapper.style.width = "28%"; // Slightly wider for better fit in 3 columns
+                                    wrapper.style.display = "inline-block";
+
+                                    const video = document.createElement("video");
+                                    video.src = src;
+                                    video.loop = true;
+                                    video.muted = true;
+                                    video.controls = true;
+                                    video.playsinline = true;
+                                    video.style.width = "100%";
+
+                                    wrapper.appendChild(video);
+                                    datasetGallery.appendChild(wrapper);
+                                    datasetVideoElements.push(wrapper);
+                                });
+
+                                // Make sure the gallery properly wraps for a 2x3 grid
+                                datasetGallery.style.flexDirection = "row";
+                            }
+
+                            function updateDatasetGallery() {
+                                // Hide all videos first
+                                datasetVideoElements.forEach((el, i) => {
+                                    const video = el.querySelector('video');
+                                    if (video) {
+                                        video.pause();
+                                    }
+                                    el.style.display = "none";
+                                });
+
+                                // Calculate start and end indices for the current group
+                                const startIdx = currentGroup * videosPerGroup;
+                                const endIdx = Math.min(startIdx + videosPerGroup, datasetVideoElements.length);
+
+                                // Display current group videos
+                                for (let i = startIdx; i < endIdx; i++) {
+                                    datasetVideoElements[i].style.display = "block";
+                                    const video = datasetVideoElements[i].querySelector('video');
+                                    if (video) {
+                                        video.muted = true; // Keep muted until user interacts
+                                        video.play().catch(e => console.log("Video play prevented:", e));
+                                    }
+                                }
+
+                                // Update indicators
+                                const indicators = document.querySelectorAll('.indicator');
+                                indicators.forEach((indicator, i) => {
+                                    if (i === currentGroup) {
+                                        indicator.style.backgroundColor = "#333";
+                                    } else {
+                                        indicator.style.backgroundColor = "#ccc";
+                                    }
+                                });
+                            }
+
+                            function nextGroupSlide() {
+                                const groupCount = Math.ceil(datasetVideoSources.length / videosPerGroup);
+                                currentGroup = (currentGroup + 1) % groupCount;
+                                updateDatasetGallery();
+                            }
+
+                            function prevGroupSlide() {
+                                const groupCount = Math.ceil(datasetVideoSources.length / videosPerGroup);
+                                currentGroup = (currentGroup - 1 + groupCount) % groupCount;
+                                updateDatasetGallery();
+                            }
+
+                            preloadDatasetVideos();
+                            updateDatasetGallery();
+                        </script>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
-                    <p style="text-align: center;"><b>Sample clips from the InterACT++ dataset</b></p>
+    </section>
+
+
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">LLM-based Trajectory Planning</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Due to the complexity of the real-world conversational scenarios, it's challenging to
+                            collect all possible trajectories for each action. To address this, we use LLM as zero-shot
+                            trajectory <span style="text-decoration: underline;" title="hello" onmouseover="showTooltip(event, )" onmouseout="hideTooltip()">prompt</span> planner to generate a high level sparse spatial points at first, and then use a
+                            diffusion-based trajectory refinement model to generate a dense motion trajectory. 
+                            
+                            <script>
+                            function showTooltip(event) {
+
+                                const show_text = ` You are writing a script for two actor's interaction scenario. You will be provided the actor's speech, aligned timecode and then you should arrange how they move in the scene. 
+
+Their relationship is classmates.
+
+And their speech is as follows:
+A: (00:00 - 00:04) Hey, Alex! Still here poring over those astronomy books?
+B: (00:04 - 00:09) Oh, Liam. Yeah, just… lost in the cosmos, I guess.
+A: (00:09 - 00:18) Cosmos, huh? Never pegged you for a stargazing type. Thought you were all about, I don't know, quiet corners and dusty historical novels.
+
+
+Please design: 
+    - Their initial XY positions at the start of the conversation. 
+    - Their XY coordinate positions (the projection on the ground) for each 2 seconds of the interaction,  considering realistic movement (if any) during the interaction. The height of both are 1.7meter, with standard body shape. 
+    - The accuracy of the coordinate positions need to be up to one decimal place
+    
+Return the information in the following json format: 
+[timecode and positions for each second] 
+{
+    "0-2s": [[A_x, A_y], [B_x, B_y]],
+    "2-4s": [[A_x, A_y], [B_x, B_y]],
+    ...
+}`;
+                                
+                                const tooltip = document.createElement('div');
+                                tooltip.id = 'custom-tooltip';
+                                tooltip.innerHTML = show_text;
+                                tooltip.style.position = 'absolute';
+                                tooltip.style.left = (event.pageX + 10) + 'px';
+                                tooltip.style.top = (event.pageY + 10) + 'px';
+                                tooltip.style.backgroundColor = 'black';
+                                tooltip.style.color = 'white';
+                                tooltip.style.padding = '5px';
+                                tooltip.style.borderRadius = '3px';
+                                tooltip.style.zIndex = '1000';
+                                document.body.appendChild(tooltip);
+                            }
+                            
+                            function hideTooltip() {
+                                const tooltip = document.getElementById('custom-tooltip');
+                                if (tooltip) {
+                                    document.body.removeChild(tooltip);
+                                }
+                            }
+                            </script>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<section class="hero is-small is-light">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="column is-centered has-text-centered">
-                <h2 class="title is-3">LLM-based Trajectory Planning</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        Due to the complexity of the real-world conversational scenarios, it's challenging to collect all possible trajectories for each action. To address this, we use LLM as zero-shot trajectory planner to generate a high level sparse spatial points at first, and then use a diffusion-based trajectory refinement model to generate a dense motion trajectory.
-                    </p>
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="video-gallery is-full has-text-centered">
+
+
+                        <div id="trajectory-gallery"></div>
+                        <div class="controls">
+                            <button onclick="prevTrajectorySlide()">&#10094;</button>
+                            <button onclick="nextTrajectorySlide()">&#10095;</button>
+                        </div>
+                        <div class="progress-indicators" id="trajectory-indicators">
+                            <!-- Progress indicators will be dynamically added here -->
+                        </div>
+
+                        <script>
+
+                            const trajectoryTextSources = [
+                                `{
+    "0-2s": [[0.0, 0.0], [2.0, 0.0]],
+    "2-4s": [[0.0, 0.0], [1.5, 0.0]],
+    "4-6s": [[0.0, 0.0], [1.5, 0.0]],
+    "6-8s": [[0.1, 0.0], [1.5, 0.0]],
+    "8-10s": [[0.1, 0.0], [1.5, 0.0]],
+    "10-12s": [[0.1, 0.0], [1.2, 0.0]],
+    "12-14s": [[0.1, 0.0], [1.2, 0.0]],
+    "14-16s": [[0.1, 0.0], [1.2, 0.0]],
+    "16-18s": [[0.1, 0.0], [1.2, 0.0]],
+    "18-20s": [[0.2, 0.0], [1.2, 0.0]],
+    "20-22s": [[0.2, 0.0], [1.2, 0.0]],
+    "22-24s": [[0.2, 0.0], [1.2, 0.0]],
+    "24-26s": [[0.2, 0.0], [1.2, 0.0]],
+    "26-28s": [[0.2, 0.0], [1.2, 0.0]],
+    "28-30s": [[0.2, 0.0], [1.2, 0.0]],
+    ...
+}`,
+
+                                `
+{
+    
+    "0-2s": [[0.0, 0.0], [1.5, 0.0]],
+    "2-4s": [[0.0, 0.0], [1.5, 0.0]],
+    "4-6s": [[0.1, 0.0], [1.5, 0.0]],
+    "6-8s": [[0.1, 0.0], [1.5, 0.1]],
+    "8-10s": [[0.1, 0.0], [1.5, 0.1]],
+    "10-12s": [[0.1, 0.0], [1.6, 0.1]],
+    "12-14s": [[0.1, 0.0], [1.7, 0.1]],
+    "14-16s": [[0.1, 0.0], [1.8, 0.1]],
+    "16-18s": [[0.1, 0.0], [1.8, 0.1]],
+    "18-20s": [[0.1, 0.1], [1.8, 0.1]],
+    "20-22s": [[0.2, 0.1], [1.8, 0.1]],
+    "22-24s": [[0.3, 0.1], [1.8, 0.1]],
+    "24-26s": [[0.4, 0.1], [1.8, 0.1]],
+    "26-28s": [[0.5, 0.1], [1.7, 0.1]],
+    "28-30s": [[0.5, 0.1], [1.7, 0.1]],
+    ...
+`,
+                                `
+{
+    "0-2s": [[1.0, 1.0], [2.2, 1.0]],
+    "2-4s": [[1.0, 1.0], [2.2, 1.0]],
+    "4-6s": [[1.0, 1.0], [2.2, 1.0]],
+    "6-8s": [[1.0, 1.0], [2.2, 1.1]],
+    "8-10s": [[1.0, 1.0], [2.2, 1.1]],
+    "10-12s": [[1.0, 1.0], [2.2, 1.1]],
+    "12-14s": [[1.1, 1.0], [2.2, 1.1]],
+    "14-16s": [[1.1, 1.0], [2.2, 1.1]],
+    "16-18s": [[1.1, 1.0], [2.2, 1.1]],
+    "18-20s": [[1.1, 1.0], [2.2, 1.1]],
+    "20-22s": [[1.1, 1.0], [2.1, 1.1]],
+    "22-24s": [[1.1, 1.0], [2.1, 1.1]],
+    "24-26s": [[1.1, 1.0], [2.1, 1.1]],
+    "26-28s": [[1.1, 1.0], [2.1, 1.1]],
+    "28-30s": [[1.1, 1.0], [2.1, 1.1]],
+    ...
+`,
+                                `
+{
+    "0-2s": [[2.0, 2.5], [3.5, 3.0]],
+    "2-4s": [[2.3, 2.7], [3.5, 3.0]],
+    "4-6s": [[2.6, 2.9], [3.5, 3.0]],
+    "6-8s": [[3.0, 3.0], [3.5, 3.0]],
+    "8-10s": [[3.0, 3.0], [3.5, 3.0]],
+    "10-12s": [[3.0, 3.0], [3.5, 3.0]],
+    "12-14s": [[3.0, 3.0], [3.5, 3.0]],
+    "14-16s": [[3.0, 3.0], [3.5, 3.0]],
+    "16-18s": [[3.0, 3.0], [3.5, 3.0]],
+    "18-20s": [[3.0, 3.0], [3.5, 3.0]],
+    "20-22s": [[3.0, 3.0], [3.5, 3.0]],
+    "22-24s": [[3.0, 3.0], [3.4, 3.2]],
+    "24-26s": [[3.0, 3.0], [3.4, 3.2]],
+    "26-28s": [[3.0, 3.0], [3.4, 3.2]],
+    "28-30s": [[3.0, 3.0], [3.4, 3.2]],
+    ...
+}`,
+                                `
+{
+    "0-2s": [[-0.4, 0.1], [0.4, -0.1]],
+    "2-4s": [[-0.4, 0.1], [0.4, -0.1]],
+    "4-6s": [[-0.4, 0.1], [0.4, -0.1]],
+    "6-8s": [[-0.4, 0.1], [0.4, -0.1]],
+    "8-10s": [[-0.4, 0.1], [0.4, -0.1]],
+    "10-12s": [[-0.4, 0.1], [0.4, -0.1]],
+    "12-14s": [[-0.4, 0.1], [0.4, -0.1]],
+    "14-16s": [[-0.4, 0.1], [0.4, -0.1]],
+    "16-18s": [[-0.4, 0.1], [0.4, -0.1]],
+    "18-20s": [[-0.4, 0.25], [0.4, 0.05]],
+    "20-22s": [[-0.4, 0.4], [0.4, 0.2]]
+}`,
+
+                                `
+{
+    "0-2s": [[0.0, 0.0], [1.5, 0.5]],
+    "2-4s": [[0.1, 0.1], [1.4, 0.6]],
+    "4-6s": [[0.0, 0.2], [1.4, 0.6]],
+    "6-8s": [[0.1, 0.3], [1.4, 0.6]],
+    "8-10s": [[0.0, 0.2], [1.4, 0.6]],
+    "10-12s": [[0.1, 0.1], [1.4, 0.6]],
+    "12-14s": [[0.2, 0.2], [1.3, 0.7]],
+    "14-16s": [[0.3, 0.3], [1.2, 0.8]],
+    "16-18s": [[0.4, 0.4], [1.2, 0.8]],
+    "18-20s": [[0.4, 0.4], [1.2, 0.8]],
+    "20-22s": [[0.4, 0.4], [1.2, 0.8]],
+    "22-24s": [[0.4, 0.4], [1.2, 0.8]],
+    "24-26s": [[0.4, 0.4], [1.2, 0.8]],
+    "26-28s": [[0.4, 0.4], [1.2, 0.8]],
+    "28-30s": [[0.4, 0.4], [1.2, 0.8]],
+    ...
+}`,
+
+                                `
+{
+    "0-2s": [[0.7, 1.0], [3.0, 4.0]],
+    "2-4s": [[0.9, 1.3], [3.0, 4.0]],
+    "4-6s": [[1.5, 2.0], [3.0, 4.2]],
+    "6-8s": [[2.1, 2.9], [3.0, 4.2]],
+    "8-10s": [[2.5, 3.5], [3.0, 4.2]],
+    "10-12s": [[2.5, 3.5], [3.0, 4.2]],
+    "12-14s": [[2.5, 3.5], [3.0, 4.2]],
+    "14-16s": [[2.5, 3.5], [3.0, 4.2]],
+    "16-18s": [[2.5, 3.5], [3.0, 4.2]],
+    "18-20s": [[2.5, 3.5], [3.0, 4.2]],
+    "20-22s": [[2.5, 3.5], [3.0, 4.2]],
+    "22-24s": [[2.5, 3.5], [3.0, 4.2]],
+    "24-26s": [[2.5, 3.5], [3.0, 4.2]],
+    "26-28s": [[2.5, 3.5], [3.0, 4.2]],
+    "28-30s": [[2.5, 3.5], [3.0, 4.2]],
+    ...
+`,
+                                `
+{
+    "0-2s": [[0.0, 0.0], [2.0, 1.0]],
+    "2-4s": [[0.0, 0.0], [2.0, 1.0]],
+    "4-6s": [[0.0, 0.0], [2.0, 1.0]],
+    "6-8s": [[0.0, 0.0], [1.8, 0.9]],
+    "8-10s": [[0.0, 0.0], [1.8, 0.9]],
+    "10-12s": [[0.0, 0.0], [1.8, 0.9]],
+    "12-14s": [[0.0, 0.0], [1.8, 0.9]],
+    "14-16s": [[0.0, 0.0], [1.8, 0.9]],
+    "16-18s": [[0.0, 0.0], [1.8, 0.9]],
+    "18-20s": [[0.0, 0.0], [1.8, 0.9]],
+    "20-22s": [[0.0, 0.0], [1.8, 0.9]],
+    "22-24s": [[0.0, 0.0], [1.8, 0.9]],
+    "24-26s": [[0.0, 0.0], [1.8, 0.9]],
+    "26-28s": [[0.0, 0.0], [1.8, 0.9]],
+    "28-30s": [[0.0, 0.0], [1.8, 0.9]],
+    ...
+}`,
+
+                                `
+{
+    "0-2s": [[0.0, 0.0], [1.5, 0.0]],
+    "2-4s": [[-0.2, 0.1], [1.5, 0.0]],
+    "4-6s": [[0.0, 0.2], [1.5, 0.0]],
+    "6-8s": [[0.1, 0.1], [1.6, 0.1]],
+    "8-10s": [[0.1, 0.1], [1.8, 0.2]],
+    "10-12s": [[0.1, 0.1], [1.9, 0.1]],
+    "12-14s": [[0.1, 0.1], [1.8, 0.1]],
+    "14-16s": [[0.2, 0.1], [1.8, 0.1]],
+    "16-18s": [[0.3, -0.1], [1.8, 0.1]],
+    "18-20s": [[0.4, 0.0], [1.8, 0.1]],
+    "20-22s": [[0.3, 0.1], [1.8, 0.1]],
+    "22-24s": [[0.2, 0.1], [1.8, 0.1]],
+    "24-26s": [[0.2, 0.1], [1.7, -0.1]],
+    "26-28s": [[0.2, 0.1], [1.6, 0.0]],
+    "28-30s": [[0.2, 0.1], [1.7, 0.1]],
+    ...
+}`,
+                            ]
+
+                            const trajectoryVideoSources = [
+                                "static/videos/traj/1_trajectory_pred_contact.mp4",
+                                "static/videos/traj/7_trajectory_pred_contact.mp4",
+                                "static/videos/traj/15_trajectory_pred_contact.mp4",
+                                "static/videos/traj/16_trajectory_pred_contact.mp4",
+                                "static/videos/traj/46_trajectory_pred_contact.mp4",
+                                "static/videos/traj/56_trajectory_pred_contact.mp4",
+                                "static/videos/traj/57_trajectory_pred_contact.mp4",
+                                "static/videos/traj/58_trajectory_pred_contact.mp4",
+                                "static/videos/traj/60_trajectory_pred_contact.mp4"
+                            ];
+
+                            let trajectoryIndex = 0;
+                            // Function to preload trajectory videos
+                            function preloadTrajectoryVideos() {
+                                trajectoryVideoSources.forEach(src => {
+                                    const video = document.createElement('video');
+                                    video.src = src;
+                                    video.preload = 'auto';
+                                    video.style.display = 'none';
+                                    document.body.appendChild(video);
+                                });
+                            }
+
+                            // Function to update the trajectory gallery
+                            function updateTrajectoryGallery() {
+                                const galleryElement = document.getElementById('trajectory-gallery');
+                                galleryElement.innerHTML = '';
+
+                                // Create container for text and video
+                                const container = document.createElement('div');
+                                container.style.display = 'flex';
+                                container.style.alignItems = 'center';
+                                container.style.justifyContent = 'center';
+                                container.style.width = '100%';
+                                container.style.gap = '2rem';
+
+                                // Create pre element for the trajectory text with title
+                                const textContainer = document.createElement('div');
+                                textContainer.style.maxWidth = '40%';
+
+                                // Add text title
+                                const textTitle = document.createElement('h4');
+                                textTitle.textContent = 'The LLM-produced sparse coordinates';
+                                textTitle.style.marginBottom = '10px';
+                                textTitle.style.textAlign = 'center';
+
+                                // Create pre element for the actual text
+                                const textPre = document.createElement('pre');
+                                textPre.style.textAlign = 'left';
+                                textPre.style.fontSize = '0.85rem';
+                                textPre.style.fontFamily = 'monospace';
+                                textPre.style.backgroundColor = '#f5f5f5';
+                                textPre.style.padding = '1rem';
+                                textPre.style.borderRadius = '5px';
+                                textPre.style.overflow = 'auto';
+                                textPre.style.maxHeight = '300px';
+                                textPre.textContent = trajectoryTextSources[trajectoryIndex % trajectoryTextSources.length];
+
+                                textContainer.appendChild(textTitle);
+                                textContainer.appendChild(textPre);
+
+                                // Create video element with title
+                                const videoContainer = document.createElement('div');
+                                videoContainer.style.maxWidth = '50%';
+
+                                // Add video title
+                                const videoTitle = document.createElement('h4');
+                                videoTitle.textContent = 'Our detailed motion trajectory';
+                                videoTitle.style.marginBottom = '10px';
+                                videoTitle.style.textAlign = 'center';
+
+                                const video = document.createElement('video');
+                                video.controls = true;
+                                video.loop = true;
+                                video.muted = false;
+                                video.src = trajectoryVideoSources[trajectoryIndex % trajectoryVideoSources.length];
+                                video.style.maxWidth = '100%';
+                                video.style.height = 'auto';
+
+                                // Add elements to container
+                                videoContainer.appendChild(videoTitle);
+                                videoContainer.appendChild(video);
+                                container.appendChild(textContainer);
+                                container.appendChild(videoContainer);
+                                galleryElement.appendChild(container);
+
+                                // Update progress indicators
+                                updateTrajectoryIndicators();
+                            }
+
+                            // Function to update the trajectory indicators
+                            function updateTrajectoryIndicators() {
+                                const indicatorsContainer = document.getElementById('trajectory-indicators');
+
+                                // Clear existing indicators
+                                indicatorsContainer.innerHTML = '';
+
+                                // Create new indicators
+                                for (let i = 0; i < trajectoryVideoSources.length; i++) {
+                                    const indicator = document.createElement('div');
+                                    indicator.className = 'indicator';
+                                    indicator.dataset.index = i;
+                                    indicator.style = `width: 12px; height: 12px; border-radius: 50%; background-color: ${i === trajectoryIndex ? "#4a4a4a" : "#ccc"}; margin: 0 5px; cursor: pointer; display: inline-block;`;
+
+                                    indicator.addEventListener('click', function () {
+                                        trajectoryIndex = i;
+                                        updateTrajectoryGallery();
+                                    });
+
+                                    indicatorsContainer.appendChild(indicator);
+                                }
+                            }
+
+                            // Navigation functions for trajectory gallery
+                            function nextTrajectorySlide() {
+                                trajectoryIndex = (trajectoryIndex + 1) % trajectoryVideoSources.length;
+                                updateTrajectoryGallery();
+                            }
+
+                            function prevTrajectorySlide() {
+                                trajectoryIndex = (trajectoryIndex - 1 + trajectoryVideoSources.length) % trajectoryVideoSources.length;
+                                updateTrajectoryGallery();
+                            }
+
+                            // Initialize the trajectory gallery
+                            preloadTrajectoryVideos();
+
+                            // Create progress indicators
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const indicatorsContainer = document.getElementById('trajectory-indicators');
+
+                                for (let i = 0; i < trajectoryVideoSources.length; i++) {
+                                    const indicator = document.createElement('div');
+                                    indicator.className = 'indicator';
+                                    indicator.dataset.index = i;
+                                    indicator.style = `width: 12px; height: 12px; border-radius: 50%; background-color: ${i === 0 ? "#4a4a4a" : "#ccc"}; margin: 0 5px; cursor: pointer; display: inline-block;`;
+
+                                    indicator.addEventListener('click', function () {
+                                        trajectoryIndex = i;
+                                        updateTrajectoryGallery();
+                                    });
+
+                                    indicatorsContainer.appendChild(indicator);
+                                }
+
+                                updateTrajectoryGallery();
+                            });
+                        </script>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<section class="hero is-small">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">Comparison of Single-person Co-Speech Motion Generation</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Different from previous seq2seq co-speech motion generative models, our motion generator is
+                            auto-regressive and can generate motion in an online manner. Benefiting from the
+                            diffusion-based motion synthesis model, our system can generate more natural motions more
+                            efficiently. There are few main insights in the AR model vs. seq2seq model:
+                        <ul>
+                            <li>
+                                <b>AR model is causal by using history window as additional input, and can generate
+                                    motion with better temporal consistency.</b>
+                            </li>
+                            <li>
+                                <b>Our model requires less future window (0.5s~1.5s), it leads less latency and better
+                                    real-time applicability.</b>
+                            </li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="video-gallery is-full has-text-centered">
+
+                        <div class="video-labels" style="display: flex; flex-direction: row;">
+                            <span class="video-label" style="margin-right: 4rem; margin-left: 4rem;" data-index="0">GT </span>
+                            <span class="video-label" style="margin-right: 4rem; margin-left: 4rem;" data-index="1">Ours </span>
+                            <span class="video-label" style="margin-right: 4rem; margin-left: 4rem;" data-index="2">AMUSE, 2024 </span>
+                            <span class="video-label" style="margin-right: 4rem; margin-left: 4rem;" data-index="3">EMAGE, 2024 </span>
+                        </div>
+
+                        <div id="single-gallery"></div>
+                        <div class="controls">
+                            <button onclick="prevSingleWayneSlide()">&#10094;</button>
+                            <button onclick="nextSingleWayneSlide()">&#10095;</button>
+                        </div>
+
+                        <!-- Progress indicators -->
+                        <div class="progress-indicators"
+                            style="display: flex; justify-content: center; margin-top: 15px;">
+                            <div class="indicator" data-index="0"
+                                style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;">
+                            </div>
+                            <div class="indicator" data-index="1"
+                                style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;">
+                            </div>
+                            <div class="indicator" data-index="2"
+                                style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;">
+                            </div>
+                            <div class="indicator" data-index="3"
+                                style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;">
+                            </div>
+                            <div class="indicator" data-index="4"
+                                style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;">
+                            </div>
+                            <div class="indicator" data-index="5"
+                                style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;">
+                            </div>
+                        </div>
+
+
+                        <script>
+                            const singleWayneVideoSources = [
+                                "static/videos/comp_single/rendering_1_wayne_0_1_1.mp4",
+                                "static/videos/comp_single/rendering_2_scott_0_1_1.mp4",
+                                "static/videos/comp_single/rendering_3_solomon_0_3_3.mp4",
+                                "static/videos/comp_single/rendering_4_lawrence_0_4_4.mp4",
+                                "static/videos/comp_single/rendering_5_stewart_0_5_5.mp4",
+                                "static/videos/comp_single/rendering_6_carla_0_65_65.mp4"
+                            ];
+
+                            let singleWayneIndex = 0;
+                            const gallery = document.getElementById("single-gallery");
+                            gallery.classList.add("video-gallery");
+
+                            const videoElements = [];
+                            const indicators = document.querySelectorAll('.indicator');
+
+                            function preloadSingleWayneVideos() {
+                                singleWayneVideoSources.forEach((src, i) => {
+                                    const wrapper = document.createElement("div");
+                                    wrapper.classList.add("video-container");
+
+                                    const video = document.createElement("video");
+                                    video.src = src;
+                                    video.loop = true;
+                                    video.muted = false;
+                                    video.controls = true;
+                                    video.playsinline = true;
+
+                                    wrapper.appendChild(video);
+                                    gallery.appendChild(wrapper);
+                                    videoElements.push(wrapper);
+                                });
+                            }
+
+                            function updateSingleWayneGallery() {
+                                // Mute all videos first
+                                videoElements.forEach((el) => {
+                                    const video = el.querySelector('video');
+                                    if (video) {
+                                        video.muted = true;
+                                        video.pause();
+                                    }
+                                    el.style.display = "none";
+                                });
+
+                                // Display and unmute the current video
+                                videoElements[singleWayneIndex].style.display = "block";
+                                const currentVideo = videoElements[singleWayneIndex].querySelector('video');
+                                if (currentVideo) {
+                                    currentVideo.muted = false;
+                                }
+
+                                // Update indicators
+                                indicators.forEach((indicator, i) => {
+                                    if (i === singleWayneIndex) {
+                                        indicator.style.backgroundColor = "#333";
+                                    } else {
+                                        indicator.style.backgroundColor = "#ccc";
+                                    }
+                                });
+                            }
+
+                            function nextSingleWayneSlide() {
+                                singleWayneIndex = (singleWayneIndex + 1) % singleWayneVideoSources.length;
+                                updateSingleWayneGallery();
+                            }
+
+                            function prevSingleWayneSlide() {
+                                singleWayneIndex = (singleWayneIndex - 1 + singleWayneVideoSources.length) % singleWayneVideoSources.length;
+                                updateSingleWayneGallery();
+                            }
+
+                            // Add click event to indicators
+                            indicators.forEach((indicator, i) => {
+                                indicator.addEventListener('click', () => {
+                                    singleWayneIndex = i;
+                                    updateSingleWayneGallery();
+                                });
+                            });
+
+                            preloadSingleWayneVideos();
+                            updateSingleWayneGallery();
+                        </script>
+                        <div style="margin-bottom: 2rem;"></div>
+                    </div>
                     
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<section class="hero is-small is-light">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="column is-centered has-text-centered">
-                <h2 class="title is-3">Comparison of Single-person Co-Speech Motion Generation</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        Different from previous seq2seq co-speech motion generative models, our motion generator is auto-regressive and can generate motion in an online manner. Benefiting from the diffusion-based motion synthesis model, our system can generate more natural motions more efficiently. There are few main insights in the AR model vs. seq2seq model:
-                        <ul>
-                            <li>
-                                <b>The pre-trained speech embedding is larger than the motion space, aligning these unbalanced data with a larger receptive field is more challenging for the seq2seq generation.</b>
-                            </li>
-                            <li>
-                                <b>AR model is causal by using history window as additional input, and can generate motion with better temporal consistency.</b>
-                            </li>
-                            <li>
-                                <b>Our model requires less future window (0.5s~1.5s), it leads less latency and better real-time applicability.</b>
-                            </li>
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">Two-person Conversational Motion Generation Results</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            We demonstrate the effectiveness of our system to generate two-person conversational
+                            motions, in more dynamic and interactive scenarios, in the following experiments.
+                        <ul></ul>
+                        <li>
+                            <b>We first evaluate the performance of our system on the test split of InterACT++ dataset,
+                                which is the first two-person conversational motion dataset.</b>
+                        </li>
+                        <li>
+                            <b>We then test our system on the wild audio test set, which contains more diverse and
+                                complex conversational scenarios.</b>
+                        </li>
                         </ul>
-                    </p>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<section class="hero is-small">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
+    <section class="hero is-small">
+        <div class="hero-body">
+
+            <div class="container is-max-desktop">
+                <p style="text-align: center; margin-bottom: 10px;"><big><b>The evaluation on the InterACT++ test set</b></big></p>
+                
                 <div class="video-gallery is-full has-text-centered">
-
-                    <div class="video-labels" style="display: flex; flex-direction: row;">
-                        <span class="video-label" data-index="0">GT </span>
-                        <span class="video-label" data-index="1">Ours </span>
-                        <span class="video-label" data-index="2">Baseline 1 </span>
-                        <span class="video-label" data-index="3">Baseline 2 </span>
-                    </div>
-
-                    <div id="single-gallery"></div>
+        
+                    <div id="benchmark-gallery"></div>
                     <div class="controls">
-                        <button onclick="prevSingleWayneSlide()">&#10094;</button>
-                        <button onclick="nextSingleWayneSlide()">&#10095;</button>
+                        <button onclick="prevBenchmarkSlide()">&#10094;</button>
+                        <button onclick="nextBenchmarkSlide()">&#10095;</button>
                     </div>
 
                     <!-- Progress indicators -->
-                    <div class="progress-indicators" style="display: flex; justify-content: center; margin-top: 15px;">
-                        <div class="indicator" data-index="0" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
-                        <div class="indicator" data-index="1" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
-                        <div class="indicator" data-index="2" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
-                        <div class="indicator" data-index="3" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;"></div>
+                    <div class="progress-indicators"
+                        style="display: flex; justify-content: center; margin-top: 15px;" id="benchmark-indicators">
+                        <!-- Indicators will be dynamically generated based on number of groups -->
                     </div>
 
 
                     <script>
-                        const singleWayneVideoSources = [
-                            "static/videos/single/1_single_wayne_0_1_1.mp4",
-                            "static/videos/single/2_scott_0_1_1.mp4", 
-                            "static/videos/single/3_solomon_0_3_3.mp4",
-                            "static/videos/single/4_lawrence_0_4_4.mp4"
+                        const benchmarkVideoSources = [
+                           
+                           "static/videos/two/2.mp4",
+                           "static/videos/two/3.mp4",
+                           "static/videos/two/4.mp4",
+                           "static/videos/two/5.mp4",
+                           "static/videos/two/6.mp4",
+                           "static/videos/two/7.mp4",
+                           "static/videos/two/8.mp4",
+                           "static/videos/two/9.mp4",
+                           "static/videos/two/12.mp4",
+                           "static/videos/two/10.mp4",
+                           "static/videos/two/11.mp4",
                         ];
 
-                        let singleWayneIndex = 0;
-                        const gallery = document.getElementById("single-gallery");
-                        gallery.classList.add("video-gallery");
+                        let benchmarkCurrentGroup = 0;
+                        const videosBenchmarkPerGroup = 2; // Show 2 videos at a time
+                        const benchmarkGallery = document.getElementById("benchmark-gallery");
+                        benchmarkGallery.classList.add("video-gallery");
+                        benchmarkGallery.style.display = "flex";
+                        benchmarkGallery.style.flexWrap = "wrap";
+                        benchmarkGallery.style.gap = "10px";
+                        benchmarkGallery.style.justifyContent = "center";
 
-                        const videoElements = [];
-                        const indicators = document.querySelectorAll('.indicator');
+                        const benchmarkVideoElements = [];
 
-                        function preloadSingleWayneVideos() {
-                            singleWayneVideoSources.forEach((src, i) => {
+                        function preloadBenchmarkVideos() {
+                            benchmarkVideoSources.forEach((src, i) => {
                                 const wrapper = document.createElement("div");
                                 wrapper.classList.add("video-container");
-                               
+                                wrapper.style.width = "45%"; // Wider for 2 videos per row
+                                wrapper.style.display = "inline-block";
+
                                 const video = document.createElement("video");
                                 video.src = src;
-                                video.loop = true;
-                                video.muted = false;
-                                video.controls = true;
-                                video.playsinline = true;
+                                    video.loop = true;
+                                    video.muted = false;
+                                    video.controls = true;
+                                    video.playsinline = true;
+
+
+                                video.style.width = "100%";
 
                                 wrapper.appendChild(video);
-                                gallery.appendChild(wrapper);
-                                videoElements.push(wrapper);
+                                benchmarkGallery.appendChild(wrapper);
+                                benchmarkVideoElements.push(wrapper);
                             });
+
+                            // Make sure the gallery properly wraps
+                            benchmarkGallery.style.flexDirection = "row";
                         }
 
-                        function updateSingleWayneGallery() {
-                            // Mute all videos first
-                            videoElements.forEach((el) => {
+                        function updateBenchmarkGallery() {
+                            // Hide all videos first
+                            benchmarkVideoElements.forEach((el, i) => {
                                 const video = el.querySelector('video');
                                 if (video) {
-                                    video.muted = true;
                                     video.pause();
                                 }
                                 el.style.display = "none";
                             });
-                            
-                            // Display and unmute the current video
-                            videoElements[singleWayneIndex].style.display = "block";
-                            const currentVideo = videoElements[singleWayneIndex].querySelector('video');
-                            if (currentVideo) {
-                                currentVideo.muted = false;
+
+                            // Calculate start and end indices for the current group
+                            const startIdx = benchmarkCurrentGroup * videosBenchmarkPerGroup;
+                            const endIdx = Math.min(startIdx + videosBenchmarkPerGroup, benchmarkVideoElements.length);
+
+                            // Display current group videos
+                            for (let i = startIdx; i < endIdx; i++) {
+                                benchmarkVideoElements[i].style.display = "block";
+                                // Removed auto-play section
                             }
-                            
+
                             // Update indicators
+                            const indicators = document.querySelectorAll('#benchmark-indicators .indicator');
                             indicators.forEach((indicator, i) => {
-                                if (i === singleWayneIndex) {
+                                if (i === benchmarkCurrentGroup) {
                                     indicator.style.backgroundColor = "#333";
                                 } else {
                                     indicator.style.backgroundColor = "#ccc";
@@ -281,104 +1055,124 @@
                             });
                         }
 
-                        function nextSingleWayneSlide() {
-                            singleWayneIndex = (singleWayneIndex + 1) % singleWayneVideoSources.length;
-                            updateSingleWayneGallery();
+                        function nextBenchmarkSlide() {
+                            const groupCount = Math.ceil(benchmarkVideoSources.length / videosBenchmarkPerGroup);
+                            benchmarkCurrentGroup = (benchmarkCurrentGroup + 1) % groupCount;
+                            updateBenchmarkGallery();
                         }
 
-                        function prevSingleWayneSlide() {
-                            singleWayneIndex = (singleWayneIndex - 1 + singleWayneVideoSources.length) % singleWayneVideoSources.length;
-                            updateSingleWayneGallery();
+                        function prevBenchmarkSlide() {
+                            const groupCount = Math.ceil(benchmarkVideoSources.length / videosBenchmarkPerGroup);
+                            benchmarkCurrentGroup = (benchmarkCurrentGroup - 1 + groupCount) % groupCount;
+                            updateBenchmarkGallery();
                         }
 
-                        // Add click event to indicators
-                        indicators.forEach((indicator, i) => {
-                            indicator.addEventListener('click', () => {
-                                singleWayneIndex = i;
-                                updateSingleWayneGallery();
-                            });
+                        // Create progress indicators
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const indicatorsContainer = document.getElementById('benchmark-indicators');
+                            const groupCount = Math.ceil(benchmarkVideoSources.length / videosBenchmarkPerGroup);
+                            
+                            for (let i = 0; i < groupCount; i++) {
+                                const indicator = document.createElement('div');
+                                indicator.className = 'indicator';
+                                indicator.dataset.index = i;
+                                indicator.style = 'width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; margin: 0 5px; cursor: pointer;';
+
+                                indicator.addEventListener('click', function () {
+                                    benchmarkCurrentGroup = i;
+                                    updateBenchmarkGallery();
+                                });
+
+                                indicatorsContainer.appendChild(indicator);
+                            }
+                            
+                            preloadBenchmarkVideos();
+                            updateBenchmarkGallery();
                         });
-
-                        preloadSingleWayneVideos();
-                        updateSingleWayneGallery();
                     </script>
+            
+            </div>  
+
+            <hr style="margin-top: 2rem; margin-bottom: 2rem; border: 0; border-top: 1px solid #eee;">
+           
+
+            <div class="container is-max-desktop">
+                <p style="text-align: center; margin-top: 4rem;  "><big><b>Comparison with Other Co-Speech Motion Synthesis Methods </b></big></p>
+
+                <div style="margin: 2rem; display: flex; flex-direction: row; justify-content: center;">
+                    <span style="margin-right: 4rem; margin-left: 4rem;" data-index="0">Audio2Photoreal, 2024 </span>
+                    <span style="margin-right: 4rem; margin-left: 4rem;" data-index="1">LDA, 2023 </span>
+                    <span style="margin-right: 4rem; margin-left: 4rem;" data-index="2">Ours </span>
+                    <span style="margin-right: 4rem; margin-left: 4rem;" data-index="3">GT </span>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-centered has-text-centered">
+                        <video poster="" id="tree" playsinline controls loop width="100%">
+                            <source src="static/videos/comp_two/1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-centered has-text-centered">
+                        <video poster="" id="tree" playsinline controls loop width="100%">
+                            <source src="static/videos/comp_two/2.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-centered has-text-centered">
+                        <video poster="" id="tree" playsinline controls loop width="100%">
+                            <source src="static/videos/comp_two/3.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-centered has-text-centered">
+                        <video poster="" id="tree" playsinline controls loop width="100%">
+                            <source src="static/videos/comp_two/4.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-centered has-text-centered">
+                        <video poster="" id="tree" playsinline controls loop width="100%">
+                            <source src="static/videos/comp_two/5.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
+
+            <hr style="margin-top: 2rem; margin-bottom: 2rem; border: 0; border-top: 1px solid #eee;">
+
+            <div class="container is-max-desktop">
+                <p style="text-align: center; margin-top: 4rem;  "><big><b>Results on the wild audio</b></big></p>
+            </div>
+
         </div>
-    </div>
-</section>
+    </section>
 
-
-<section class="hero is-small is-light">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="column is-centered has-text-centered">
-                <h2 class="title is-3">Two-person Conversational Motion Generation Results</h2>
-                <div class="content has-text-justified">
+    <footer class="footer">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
                     <p>
-                        We demonstrate the effectiveness of our system to generate two-person conversational motions, in more dynamic and interactive scenarios, in the following experiments.
-                        <ul></ul>
-                            <li>
-                                <b>We first evaluate the performance of our system on the test split of InterACT++ dataset, which is the first two-person conversational motion dataset.</b>
-                            </li>
-                            <li>
-                                <b>We then test our system on the wild audio test set, which contains more diverse and complex conversational scenarios.</b>
-                            </li>
-                        </ul>
+                        This website is licensed under a <a rel="license"
+                            href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                            Commons Attribution-ShareAlike 4.0 International License</a>.
+                    </p>
+                    <p>
+                        Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page.
+                        If
+                        you want to reuse their <a href="https://github.com/nerfies/nerfies.github.io">source code</a>,
+                        please credit them
+                        appropriately.
                     </p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
-<section class="hero is-small">
-    <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
-                    <p style="text-align: center;"><b>Benchmark on the InterACT++ </b></p>
-                </div>
-            </div>
         </div>
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
-                    <p style="text-align: center;"><b>Comparison with Baselines</b></p>
-                </div>
-            </div>
-        </div>
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-full has-text-centered">
-                    <p style="text-align: center;"><b>Wild Audio Test Set</b></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="footer">
-    <div class="columns is-centered">
-        <div class="column is-8">
-            <div class="content">
-                <p>
-                    This website is licensed under a <a rel="license"
-                                                        href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-                    Commons Attribution-ShareAlike 4.0 International License</a>.
-                </p>
-                <p>
-                    Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If
-                    you want to reuse their <a
-                        href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them
-                    appropriately.
-                </p>
-            </div>
-        </div>
-    </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
+
 </html>

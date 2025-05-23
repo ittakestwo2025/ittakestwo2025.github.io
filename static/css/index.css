@@ -151,7 +151,6 @@ body {
 }
 
 
-
 .video-gallery {
   position: relative;
   z-index: 2; 
@@ -170,6 +169,44 @@ body {
   position: relative;
 }
 
+.video-gallery #dataset-gallery {
+  display: flex;
+  gap: 1rem;
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out;
+  position: relative;
+}
+
+.video-gallery #trajectory-gallery {
+  display: flex;
+  gap: 1rem;
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out;
+  position: relative;
+}
+
+.video-gallery #comp-two-gallery {
+  display: flex;
+  gap: 1rem;
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out;
+  position: relative;
+}
+
+.video-gallery #ours-gallery {
+  display: flex;
+  gap: 1rem;
+  z-index: 3;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .video-gallery .video-container {
   text-align: center;
   position: relative;
@@ -179,15 +216,17 @@ body {
   flex-shrink: 0;
 }
 
-.video-gallery .video-label {
+.video-labels{
   font-weight: bold;
   color: #000;
   text-decoration: none;
-  margin-right: 2rem;
-  margin-left: 2rem;
+  margin-right: 4rem;
+  margin-left: 4rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
+
+
 
 .video-gallery .video-container.active {
   display: block;
